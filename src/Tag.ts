@@ -13,8 +13,9 @@ export default class Tag {
         if (this.options) {
             const options = Object
                 .entries(this.options)
-                .map(([key, value]: [string, string]) => `${key}=${value}`)
+                .map(([key, value]: [string, string]) => `${key}="${value}"`)
                 .join(' ');
+            result += ' ';
             result += options;
         }
 
