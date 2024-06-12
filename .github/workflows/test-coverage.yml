@@ -31,5 +31,5 @@ jobs:
         with:
           coverageCommand: make test-coverage
           coverageLocations: |
-            ${{github.workspace}}/*.lcov:lcov
+            ${{github.workspace}}/coverage/clover.yml
           debug: true
