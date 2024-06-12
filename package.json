@@ -4,16 +4,37 @@
   "description": "[![Actions Status](https://github.com/vladislav1923/typescript-project-81/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/vladislav1923/typescript-project-81/actions)",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "build": "rimraf ./dist && tsc",
+    "start:dev": "npx nodemon",
+    "start:dev-experimental": "node --watch --loader=ts-node/esm ./src/index.ts",
+    "start": "npm run build && node dist/index.js",
+    "exec": "npx ts-node ./src/index.ts",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
+    "test": "vitest",
+    "test-coverage": "npx vitest run --coverage"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "typescript": "^5.4.5"
-  },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.1.4"
+    "@types/eslint": "^8.44.6",
+    "@types/node": "^20.8.10",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "@vitest/coverage-v8": "^0.34.6",
+    "eslint": "^8.53.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-config-standard-with-typescript": "^39.1.1",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-n": "^16.3.1",
+    "eslint-plugin-promise": "^6.1.1",
+    "nodemon": "^3.0.1",
+    "npm-check-updates": "^16.14.6",
+    "rimraf": "^5.0.5",
+    "simple-git-hooks": "^2.9.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.2.2",
+    "vitest": "^0.34.6"
   }
 }
