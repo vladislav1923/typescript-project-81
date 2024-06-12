@@ -32,4 +32,6 @@ jobs:
           coverageCommand: make test-coverage
           coverageLocations: |
             ${{github.workspace}}/coverage/clover.yml
+            /coverage/clover.yml
+            /coverage/coverage-final.json
           debug: true
