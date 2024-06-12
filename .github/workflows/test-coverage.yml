@@ -27,7 +27,7 @@ jobs:
       - run: npm install -g typescript
       - run: make test-coverage
       - run: |
-          cat /coverage/clover.yml
+          cat ${{ github.workspace }}/coverage/clover.xml
       - uses: paambaati/codeclimate-action@v8.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
