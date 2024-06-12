@@ -1,31 +1,35 @@
 name: test-coverage
+
 on:
+  pull_request:
+    branches:
+      - main
   push:
     branches:
       - main
-    tags:
-      - '!*' # Do not execute on tags
-    paths:
-      - src/*
-      - test/*
-      - '*.json'
-      - package-lock.lock
-  pull_request:
-    paths:
-      - '!*.MD'
+
 jobs:
-  coverage:
-    needs: [ test ]
-    name: coverage
+  build:
+    # The type of machine to run the job on
     runs-on: ubuntu-latest
+
+    strategy:
+      # Node versions list
+      matrix:
+        node-version: [ 20.x ]
+
     steps:
-      - uses: actions/checkout@master
-      - uses: actions/setup-node@master
+      # Check-out repository under GitHub workspace
+      # https://github.com/actions/checkout
+      - uses: actions/checkout@v4
+        # Step's name
+      - name: Use Node.js ${{ matrix.node-version }}
+        # Configures the node version used on GitHub-hosted runners
+        # https://github.com/actions/setup-node
+        uses: actions/setup-node@v3
+        # The Node.js version to configure
         with:
-          node-version: '12'
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
       - run: make install
-      - uses: paambaati/codeclimate-action@v2.2.4
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
-        with:
-          coverageCommand: make test-coverage
+      - run: make test-coverage
