@@ -12,7 +12,7 @@
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "test": "vitest",
-    "test-coverage": "npx vitest run --coverage --coverage-reporter=v8"
+    "test-coverage": "npx vitest run --coverage"
   },
   "author": "",
   "license": "ISC",
