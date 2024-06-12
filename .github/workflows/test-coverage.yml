@@ -31,5 +31,5 @@ jobs:
         with:
           coverageCommand: make test-coverage
           coverageLocations: |
-            coverage/lcov.info
+            ${{github.workspace}}/*.lcov:lcov
           debug: true
