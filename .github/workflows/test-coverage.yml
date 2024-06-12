@@ -27,7 +27,7 @@ jobs:
       - run: npm install -g typescript
       - uses: paambaati/codeclimate-action@v8.0.0
         env:
-          CC_TEST_REPORTER_ID: 0e46f8acaa63ca55a5a0175037fdc75d5018c401e06491d2f4dd35c67939714c
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: make test-coverage
           debug: true
