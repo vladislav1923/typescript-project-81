@@ -1,15 +1,15 @@
-import Tag, {TagOptions} from './Tag';
+import Tag, { TagOptions } from './Tag';
 
 type FormOptions = {
   url?: string;
-}
+};
 
-type InputOptions = Record<string, string | number>
+type InputOptions = Record<string, string | number>;
 
 type Input = {
   name: string;
   options?: InputOptions;
-}
+};
 
 type Template = Record<string, string>;
 
@@ -17,9 +17,9 @@ type Callback = (form: Form) => void;
 
 export default class Form {
   static formFor(
-      template: Template,
-      options?: FormOptions,
-      callback?: Callback
+    template: Template,
+    options?: FormOptions,
+    callback?: Callback,
   ): string {
     return new Form(template, options, callback).toString();
   }
@@ -27,9 +27,9 @@ export default class Form {
   private inputs: Input[] = [];
 
   constructor(
-      private template: Template,
-      private options?: FormOptions,
-      private callback?: Callback
+    private template: Template,
+    private options?: FormOptions,
+    private callback?: Callback,
   ) {}
 
   input(name: string, options?: InputOptions): void {
@@ -41,7 +41,9 @@ export default class Form {
   }
 
   toString(): string {
-    this.callback && this.callback(this);
+    if (this.callback) {
+      this.callback(this);
+    }
 
     const tagOptions = {
       method: 'post',
@@ -56,8 +58,8 @@ export default class Form {
       const isTextarea = input?.options?.as === 'textarea';
       const options: TagOptions = {
         name: input.name,
-        ...input.options
-      }
+        ...input.options,
+      };
 
       if (!isTextarea) {
         options.value = this.template[input.name];
