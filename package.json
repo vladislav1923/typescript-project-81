@@ -16,6 +16,9 @@
   },
   "author": "",
   "license": "ISC",
+  "simple-git-hooks": {
+    "pre-push": "make lint"
+  },
   "devDependencies": {
     "@types/eslint": "^8.44.6",
     "@types/node": "^20.8.10",
