@@ -19,7 +19,7 @@ test('should generate form (set url, an input)', () => {
     { url: '/submit' },
     (form: Form) => form.input('name'),
   );
-  const expected = '<form method="post" action="/submit"><input name="name" value="Franky" type="text"></form>';
+  const expected = '<form method="post" action="/submit"><input value="Franky" type="text" name="name"></form>';
   expect(result).toBe(expected);
 });
 
@@ -32,11 +32,11 @@ test('should generate form (set url, two inputs)', () => {
       form.input('age');
     },
   );
-  const expected = '<form method="post" action="/submit"><input name="name" value="Franky" type="text"><input name="age" value="18" type="text"></form>';
+  const expected = '<form method="post" action="/submit"><input value="Franky" type="text" name="name"><input value="18" type="text" name="age"></form>';
   expect(result).toBe(expected);
 });
 
-test('should generate form (set url, an input and a textarea)', () => {
+test('should generate form (set url, input and textarea)', () => {
   const result = Form.formFor(
     { name: 'Franky', job: 'Engineer' },
     { url: '/submit' },
@@ -45,7 +45,7 @@ test('should generate form (set url, an input and a textarea)', () => {
       form.input('job', { as: 'textarea', rows: 50, cols: 50 });
     },
   );
-  const expected = '<form method="post" action="/submit"><input name="name" value="Franky" type="text"><textarea name="job" as="textarea" rows="50" cols="50">Engineer</textarea></form>';
+  const expected = '<form method="post" action="/submit"><input value="Franky" type="text" name="name"><textarea as="textarea" rows="50" cols="50" name="job">Engineer</textarea></form>';
   expect(result).toBe(expected);
 });
 
@@ -67,4 +67,18 @@ test('should throw an error if an input name is not included in the template', (
       expect(e.message).toBe(expectedErrorMessage);
     }
   }
+});
+
+test('should generate form (set url, input, textarea and submit button with default text)', () => {
+  const result = Form.formFor(
+      { name: 'Franky', job: 'Engineer' },
+      { url: '/submit' },
+      (form: Form) => {
+        form.input('name');
+        form.input('job', { as: 'textarea', rows: 50, cols: 50 });
+        form.submit();
+      },
+  );
+  const expected = '<form method="post" action="/submit"><input value="Franky" type="text" name="name"><textarea as="textarea" rows="50" cols="50" name="job">Engineer</textarea><input value="Save" type="submit"></form>';
+  expect(result).toBe(expected);
 });

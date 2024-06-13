@@ -15,6 +15,8 @@ type Template = Record<string, string>;
 
 type Callback = (form: Form) => void;
 
+const DEFAULT_SUBMIT_BUTTON_TEXT = 'Save';
+
 export default class Form {
   static formFor(
     template: Template,
@@ -40,6 +42,11 @@ export default class Form {
     }
   }
 
+  submit(name: string = DEFAULT_SUBMIT_BUTTON_TEXT): void {
+    this.inputs.push({ name, options: { as: 'submit' } });
+    this.template['submit'] = name;
+  }
+
   toString(): string {
     if (this.callback) {
       this.callback(this);
@@ -55,19 +62,33 @@ export default class Form {
     }
 
     const children: string = this.inputs.map((input: Input) => {
-      const isTextarea = input?.options?.as === 'textarea';
       const options: TagOptions = {
-        name: input.name,
         ...input.options,
       };
 
-      if (!isTextarea) {
-        options.value = this.template[input.name];
-        options.type = 'text';
-      }
+      let name: string = 'input';
+      let innerText: string = '';
 
-      const name = isTextarea ? 'textarea' : 'input';
-      const innerText = isTextarea ? this.template[input.name] : '';
+      switch (input?.options?.as) {
+        case 'textarea': {
+          name = 'textarea';
+          innerText = this.template[input.name];
+          options.name = input.name;
+          break;
+        }
+        case 'submit': {
+          options.value = input.name;
+          options.type = 'submit';
+          delete options.as;
+          break;
+        }
+        default: {
+          options.value = this.template[input.name];
+          options.type = 'text';
+          options.name = input.name;
+          break;
+        }
+      }
 
       return new Tag(name, options, innerText).toString();
     }).join('');
