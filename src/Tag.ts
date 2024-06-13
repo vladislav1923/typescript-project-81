@@ -1,6 +1,6 @@
 const SINGLE_TAGS: string[] = ['input', 'img', 'br'];
 
-export type TagOptions = Record<string, string | number>;
+type TagOptions = Record<string, string | number>;
 
 export default class Tag {
   constructor(

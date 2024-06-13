@@ -1,4 +1,4 @@
-import Tag, { TagOptions } from './Tag';
+import Tag from './Tag';
 
 type FormOptions = {
   url?: string;
@@ -62,35 +62,28 @@ export default class Form {
     }
 
     const children: string = this.inputs.map((input: Input) => {
-      const options: TagOptions = {
-        ...input.options,
-      };
-
-      let name: string = 'input';
-      let innerText: string = '';
-
       switch (input?.options?.as) {
         case 'textarea': {
-          name = 'textarea';
-          innerText = this.template[input.name];
-          options.name = input.name;
-          break;
+          return [new Tag('textarea', {
+            name: input.name,
+            ...input.options,
+          }, this.template[input.name]).toString()];
         }
         case 'submit': {
-          options.value = input.name;
-          options.type = 'submit';
-          delete options.as;
-          break;
+          return [new Tag('input', {
+            value: input.name,
+            type: 'submit',
+          }).toString()];
         }
         default: {
-          options.value = this.template[input.name];
-          options.type = 'text';
-          options.name = input.name;
-          break;
+          return [new Tag('input', {
+            value: this.template[input.name],
+            type: 'text',
+            name: input.name,
+            ...input.options,
+          }).toString()];
         }
       }
-
-      return new Tag(name, options, innerText).toString();
     }).join('');
 
     return new Tag('form', tagOptions, children).toString();
