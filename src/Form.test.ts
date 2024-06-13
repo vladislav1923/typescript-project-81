@@ -71,13 +71,13 @@ test('should throw an error if an input name is not included in the template', (
 
 test('should generate form (set url, input, textarea and submit button with default text)', () => {
   const result = Form.formFor(
-      { name: 'Franky', job: 'Engineer' },
-      { url: '/submit' },
-      (form: Form) => {
-        form.input('name');
-        form.input('job', { as: 'textarea', rows: 50, cols: 50 });
-        form.submit();
-      },
+    { name: 'Franky', job: 'Engineer' },
+    { url: '/submit' },
+    (form: Form) => {
+      form.input('name');
+      form.input('job', { as: 'textarea', rows: 50, cols: 50 });
+      form.submit();
+    },
   );
   const expected = '<form method="post" action="/submit"><input value="Franky" type="text" name="name"><textarea as="textarea" rows="50" cols="50" name="job">Engineer</textarea><input value="Save" type="submit"></form>';
   expect(result).toBe(expected);

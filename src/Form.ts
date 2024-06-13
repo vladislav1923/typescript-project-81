@@ -44,7 +44,7 @@ export default class Form {
 
   submit(name: string = DEFAULT_SUBMIT_BUTTON_TEXT): void {
     this.inputs.push({ name, options: { as: 'submit' } });
-    this.template['submit'] = name;
+    this.template.submit = name;
   }
 
   toString(): string {
