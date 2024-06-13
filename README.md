@@ -13,6 +13,7 @@ const template = { name: 'rob', job: 'hexlet' };
 const form = HexletCode.formFor(template, { method: 'post' }, (f) => {
     f.input('name');
     f.input('job', { as: 'textarea' });
+    f.submit('Send Form');
 });
 
 console.log(form);
@@ -20,5 +21,6 @@ console.log(form);
 //  <form action="#" method="post">
 //      <input name="name" type="text" value="rob">
 //      <textarea cols="20" rows="40" name="job" as="textarea">hexlet</textarea>
+//      <input type="submit" value="Send Form">
 //  </form>
 ```
