@@ -82,10 +82,10 @@ class Form {
             new Tag(
               'textarea',
               {
-                name: input.name,
                 ...options,
                 cols: options?.cols ?? 20,
                 rows: options?.cols ?? 40,
+                name: input.name,
               },
               this.template[input.name],
             ).toString(),
