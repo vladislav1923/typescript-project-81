@@ -102,9 +102,9 @@ class Form {
             new Tag(
               'input',
               {
-                value: this.template[input.name],
-                type: 'text',
                 name: input.name,
+                type: 'text',
+                value: this.template[input.name],
                 ...input.options,
               },
             ).toString(),
