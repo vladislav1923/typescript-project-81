@@ -19,7 +19,7 @@ const DEFAULT_SUBMIT_BUTTON_TEXT = 'Save';
 
 const capitalizeFirstLetter = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
 
-export default class Form {
+class Form {
   static formFor(
     template: Template,
     options?: FormOptions,
@@ -116,3 +116,5 @@ export default class Form {
     return new Tag('form', tagOptions, children).toString();
   }
 }
+
+export default Form;

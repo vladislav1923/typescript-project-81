@@ -2,7 +2,7 @@ const SINGLE_TAGS: string[] = ['input', 'img', 'br'];
 
 type TagOptions = Record<string, string | number>;
 
-export default class Tag {
+class Tag {
   constructor(
     private name: string,
     private options?: TagOptions,
@@ -36,3 +36,5 @@ export default class Tag {
     return result;
   }
 }
+
+export default Tag;
