@@ -22,7 +22,7 @@ console.log(form);
 //      <label for="name">Name</label>
 //      <input name="name" type="text" value="rob">
 //      <label for="job">Job</label>
-//      <textarea cols="20" rows="40" name="job" as="textarea">hexlet</textarea>
+//      <textarea name="job" cols="20" rows="40">hexlet</textarea>
 //      <input type="submit" value="Send Form">
 //  </form>
 ```

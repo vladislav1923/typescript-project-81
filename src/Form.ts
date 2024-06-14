@@ -64,7 +64,11 @@ class Form {
     }
 
     const children: string = this.inputs.map((input: Input) => {
-      switch (input?.options?.as) {
+      const as = input?.options?.as;
+
+      delete input?.options?.as;
+
+      switch (as) {
         case 'textarea': {
           return [
             new Tag(
@@ -86,8 +90,8 @@ class Form {
         }
         case 'submit': {
           return new Tag('input', {
-            value: input.name,
             type: 'submit',
+            value: input.name,
           }).toString();
         }
         default: {
