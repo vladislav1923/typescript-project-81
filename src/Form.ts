@@ -64,9 +64,10 @@ class Form {
     }
 
     const children: string = this.inputs.map((input: Input) => {
-      const as = input?.options?.as;
+      const options = input?.options ?? {};
+      const as = options?.as;
 
-      delete input?.options?.as;
+      delete options?.as;
 
       switch (as) {
         case 'textarea': {
@@ -82,7 +83,7 @@ class Form {
               'textarea',
               {
                 name: input.name,
-                ...input.options,
+                ...options,
               },
               this.template[input.name],
             ).toString(),
@@ -109,7 +110,7 @@ class Form {
                 name: input.name,
                 type: 'text',
                 value: this.template[input.name],
-                ...input.options,
+                ...options,
               },
             ).toString(),
           ].join('');
