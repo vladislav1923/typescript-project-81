@@ -17,6 +17,8 @@ type Callback = (form: Form) => void;
 
 const DEFAULT_SUBMIT_BUTTON_TEXT = 'Save';
 
+const capitalizeFirstLetter = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
+
 export default class Form {
   static formFor(
     template: Template,
@@ -64,24 +66,49 @@ export default class Form {
     const children: string = this.inputs.map((input: Input) => {
       switch (input?.options?.as) {
         case 'textarea': {
-          return [new Tag('textarea', {
-            name: input.name,
-            ...input.options,
-          }, this.template[input.name]).toString()];
+          return [
+            new Tag(
+              'label',
+              {
+                for: input.name,
+              },
+              capitalizeFirstLetter(input.name),
+            ).toString(),
+            new Tag(
+              'textarea',
+              {
+                name: input.name,
+                ...input.options,
+              },
+              this.template[input.name],
+            ).toString(),
+          ].join('');
         }
         case 'submit': {
-          return [new Tag('input', {
+          return new Tag('input', {
             value: input.name,
             type: 'submit',
-          }).toString()];
+          }).toString();
         }
         default: {
-          return [new Tag('input', {
-            value: this.template[input.name],
-            type: 'text',
-            name: input.name,
-            ...input.options,
-          }).toString()];
+          return [
+            new Tag(
+              'label',
+              {
+                for: input.name,
+              },
+              capitalizeFirstLetter(input.name),
+            ).toString(),
+            new Tag(
+              'input',
+              {
+                value: this.template[input.name],
+                type: 'text',
+                name: input.name,
+                ...input.options,
+              },
+            ).toString(),
+          ].join('');
         }
       }
     }).join('');
