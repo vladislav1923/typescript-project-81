@@ -1,4 +1,4 @@
-/* eslint-disable fp/no-mutation */
+/* eslint-disable */
 module.exports = {
   plugins: [
     '@typescript-eslint',
