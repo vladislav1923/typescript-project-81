@@ -84,6 +84,8 @@ class Form {
               {
                 name: input.name,
                 ...options,
+                cols: options?.cols ?? 20,
+                rows: options?.cols ?? 40,
               },
               this.template[input.name],
             ).toString(),
