@@ -19,7 +19,7 @@ test('should generate form (set url, an input)', () => {
     { url: '/submit' },
     (form: Form) => form.input('name'),
   );
-  const expected = '<form method="post" action="/submit"><input value="Franky" type="text" name="name"></form>';
+  const expected = '<form method="post" action="/submit"><label for="name">Name</label><input value="Franky" type="text" name="name"></form>';
   expect(result).toBe(expected);
 });
 
